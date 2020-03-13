@@ -12,7 +12,6 @@ PerfectAppSwitcher13_FILES = PerfectAppSwitcher13.xm
 PerfectAppSwitcher13_CFLAGS = -fobjc-arc
 PerfectAppSwitcher13_EXTRA_FRAMEWORKS += Cephei
 
-include $(THEOS)/makefiles/bundle.mk
 include $(THEOS_MAKE_PATH)/tweak.mk
 
 SUBPROJECTS += Preferences

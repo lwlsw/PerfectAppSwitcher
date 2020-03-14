@@ -106,10 +106,16 @@
 	@autoreleasepool
 	{
 		pref = [[HBPreferences alloc] initWithIdentifier: @"com.johnzaro.perfectappswitcher13prefs"];
+		[pref registerDefaults:
+		@{
+			@"gridSwitcher": @NO,
+			@"disablePlayingMediaKilling": @NO,
+			@"enableKillAll": @NO
+    	}];
 
-		[pref registerBool: &gridSwitcher default: NO forKey: @"gridSwitcher"];
-		[pref registerBool: &disablePlayingMediaKilling default: NO forKey: @"disablePlayingMediaKilling"];
-		[pref registerBool: &enableKillAll default: NO forKey: @"enableKillAll"];
+		gridSwitcher = [pref boolForKey: @"gridSwitcher"];
+		disablePlayingMediaKilling = [pref boolForKey: @"disablePlayingMediaKilling"];
+		enableKillAll = [pref boolForKey: @"enableKillAll"];
 
 		if(gridSwitcher) %init(gridSwitcherGroup);
 		if(disablePlayingMediaKilling) %init(disablePlayingMediaKillingGroup);

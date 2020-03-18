@@ -1,5 +1,12 @@
 #import "PerfectAppSwitcher13.h"
 
+#import <Cephei/HBPreferences.h>
+
+static HBPreferences *pref;
+static BOOL gridSwitcher;
+static BOOL disablePlayingMediaKilling;
+static BOOL enableKillAll;
+
 // ------------------------------ CUSTOM GRID SWITCHER - iPAD STYLE ------------------------------
 
 %group gridSwitcherGroup

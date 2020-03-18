@@ -1,11 +1,3 @@
-#import <Cephei/HBPreferences.h>
-
-HBPreferences *_Nullable pref;
-
-BOOL gridSwitcher;
-BOOL disablePlayingMediaKilling;
-BOOL enableKillAll;
-
 @interface SBApplication: NSObject
 -(NSString*) displayName;
 @property(nonatomic, readonly) NSString *bundleIdentifier;

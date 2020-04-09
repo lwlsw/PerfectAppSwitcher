@@ -2,10 +2,20 @@
 
 #import <Cephei/HBPreferences.h>
 
+#define IS_iPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+
 static HBPreferences *pref;
+static BOOL enabled;
 static BOOL gridSwitcher;
 static BOOL disablePlayingMediaKilling;
 static BOOL enableKillAll;
+static BOOL hideAppName;
+static BOOL hideAppIcon;
+static float appScale;
+static NSInteger horizontalPortraitSpace;
+static NSInteger verticalPortraitSpace;
+static NSInteger horizontalLandscapeSpace;
+static NSInteger verticalLandscapeSpace;
 
 // ------------------------------ CUSTOM GRID SWITCHER - iPAD STYLE ------------------------------
 
@@ -15,27 +25,27 @@ static BOOL enableKillAll;
 
 	- (void)setGridSwitcherPageScale: (double)arg
 	{
-		%orig(0.38);
+		%orig(appScale);
 	}
 
 	- (void)setGridSwitcherHorizontalInterpageSpacingPortrait: (double)arg
 	{
-		%orig(30);
+		%orig(horizontalPortraitSpace);
 	}
 
 	- (void)setGridSwitcherVerticalNaturalSpacingPortrait: (double)arg
 	{
-		%orig(65);
+		%orig(verticalPortraitSpace);
 	}
 
 	- (void)setGridSwitcherHorizontalInterpageSpacingLandscape: (double)arg
 	{
-		%orig(10);
+		%orig(horizontalLandscapeSpace);
 	}
 
 	- (void)setGridSwitcherVerticalNaturalSpacingLandscape: (double)arg
 	{
-		%orig(40);
+		%orig(verticalLandscapeSpace);
 	}
 
 	- (void)setSwitcherStyle: (long long)arg
@@ -91,7 +101,7 @@ static BOOL enableKillAll;
 
 			NSString *nowPlayingID = [[[%c(SBMediaController) sharedInstance] nowPlayingApplication] bundleIdentifier];
 
-			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), 
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), 
 			^{
 				for(SBAppLayout *item in items)
 				{
@@ -108,6 +118,32 @@ static BOOL enableKillAll;
 
 %end
 
+%group hideAppNameGroup
+
+	%hook SBFluidSwitcherItemContainerHeaderView
+
+	- (void)setTextAlpha: (double)arg1
+	{
+		%orig(0);
+	}
+
+	%end
+
+%end
+
+%group hideAppIconGroup
+
+	%hook SBFluidSwitcherIconImageContainerView
+
+	- (void)layoutSubviews
+	{
+		
+	}
+
+	%end
+
+%end
+
 %ctor
 {
 	@autoreleasepool
@@ -115,17 +151,42 @@ static BOOL enableKillAll;
 		pref = [[HBPreferences alloc] initWithIdentifier: @"com.johnzaro.perfectappswitcher13prefs"];
 		[pref registerDefaults:
 		@{
+			@"enabled": @NO,
 			@"gridSwitcher": @NO,
 			@"disablePlayingMediaKilling": @NO,
-			@"enableKillAll": @NO
+			@"enableKillAll": @NO,
+			@"hideAppName": @NO,
+			@"hideAppIcon": @NO,
+			@"appScale": @0.38,
+			@"horizontalPortraitSpace": @30,
+			@"verticalPortraitSpace": @65,
+			@"horizontalLandscapeSpace": @10,
+			@"verticalLandscapeSpace": @40
     	}];
 
-		gridSwitcher = [pref boolForKey: @"gridSwitcher"];
-		disablePlayingMediaKilling = [pref boolForKey: @"disablePlayingMediaKilling"];
-		enableKillAll = [pref boolForKey: @"enableKillAll"];
+		enabled = [pref boolForKey: @"enabled"];
+		if(enabled)
+		{
+			gridSwitcher = [pref boolForKey: @"gridSwitcher"];
+			disablePlayingMediaKilling = [pref boolForKey: @"disablePlayingMediaKilling"];
+			enableKillAll = [pref boolForKey: @"enableKillAll"];
+			hideAppName = [pref boolForKey: @"hideAppName"];
+			hideAppIcon = [pref boolForKey: @"hideAppIcon"];
 
-		if(gridSwitcher) %init(gridSwitcherGroup);
-		if(disablePlayingMediaKilling) %init(disablePlayingMediaKillingGroup);
-		if(enableKillAll) %init(enableKillAllGroup);
+			if(gridSwitcher && !IS_iPAD)
+			{
+				appScale = [pref floatForKey: @"appScale"];
+				horizontalPortraitSpace = [pref integerForKey: @"horizontalPortraitSpace"];
+				verticalPortraitSpace = [pref integerForKey: @"verticalPortraitSpace"];
+				horizontalLandscapeSpace = [pref integerForKey: @"horizontalLandscapeSpace"];
+				verticalLandscapeSpace = [pref integerForKey: @"verticalLandscapeSpace"];
+
+				%init(gridSwitcherGroup);
+			}
+			if(disablePlayingMediaKilling) %init(disablePlayingMediaKillingGroup);
+			if(enableKillAll) %init(enableKillAllGroup);
+			if(hideAppName) %init(hideAppNameGroup);
+			if(hideAppIcon) %init(hideAppIconGroup);
+		}
 	}
 }

@@ -15,8 +15,24 @@
 		<dict>
         	<key>cell</key>
 			<string>PSGroupCell</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectappswitcher13prefs</string>
+			<key>key</key>
+			<string>enabled</string>
 			<key>label</key>
-			<string>SETTINGS</string>
+			<string>Enabled</string>
+		</dict>
+		<dict>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>GRID SWITCHER - IPHONE ONLY</string>
         </dict>
 		<dict>
 			<key>cell</key>
@@ -32,6 +48,82 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>keyboard</key>
+			<string>numbers</string>
+			<key>default</key>
+			<string>0.38</string>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectappswitcher13prefs</string>
+			<key>key</key>
+			<string>appScale</string>
+			<key>label</key>
+			<string>App Scale</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>keyboard</key>
+			<string>numbers</string>
+			<key>default</key>
+			<string>30</string>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectappswitcher13prefs</string>
+			<key>key</key>
+			<string>horizontalPortraitSpace</string>
+			<key>label</key>
+			<string>Horizontal Space - Portrait</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>keyboard</key>
+			<string>numbers</string>
+			<key>default</key>
+			<string>65</string>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectappswitcher13prefs</string>
+			<key>key</key>
+			<string>verticalPortraitSpace</string>
+			<key>label</key>
+			<string>Vertical Space - Portrait</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>keyboard</key>
+			<string>numbers</string>
+			<key>default</key>
+			<string>10</string>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectappswitcher13prefs</string>
+			<key>key</key>
+			<string>horizontalLandscapeSpace</string>
+			<key>label</key>
+			<string>Horizontal Space - Landscape</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>keyboard</key>
+			<string>numbers</string>
+			<key>default</key>
+			<string>40</string>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectappswitcher13prefs</string>
+			<key>key</key>
+			<string>verticalLandscapeSpace</string>
+			<key>label</key>
+			<string>Vertical Space - Landscape</string>
+		</dict>
+		<dict>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>APP KILLING</string>
+        </dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
 			<false/>
@@ -40,7 +132,7 @@
 			<key>key</key>
 			<string>disablePlayingMediaKilling</string>
 			<key>label</key>
-			<string>Disable Killing Of Playing Media Apps</string>
+			<string>Media Apps Not Killable</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -52,7 +144,37 @@
 			<key>key</key>
 			<string>enableKillAll</string>
 			<key>label</key>
-			<string>Enable Swipe Down To Kill All Apps</string>
+			<string>Swipe Down To Kill All Apps</string>
+		</dict>
+		<dict>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>DISPLAY OPTIONS</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectappswitcher13prefs</string>
+			<key>key</key>
+			<string>hideAppName</string>
+			<key>label</key>
+			<string>Hide App Name</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectappswitcher13prefs</string>
+			<key>key</key>
+			<string>hideAppIcon</string>
+			<key>label</key>
+			<string>Hide App Icon</string>
 		</dict>
 		<dict>
         	<key>cell</key>
@@ -82,7 +204,7 @@
 			<key>icon</key>
 			<string>github.png</string>
 			<key>url</key>
-   	 		<string>https://github.com/johnzaro/perfectappswitcher13</string>
+   	 		<string>https://github.com/johnzaro/PerfectAppSwitcher13</string>
 		</dict>
  		<dict>
         	<key>cell</key>

@@ -9,7 +9,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = PerfectAppSwitcher13
 PerfectAppSwitcher13_FILES = PerfectAppSwitcher13.xm
-PerfectAppSwitcher13_CFLAGS = -fobjc-arc
+PerfectAppSwitcher13_CFLAGS = -fobjc-arc -Wno-logical-op-parentheses
 PerfectAppSwitcher13_EXTRA_FRAMEWORKS += Cephei
 
 include $(THEOS_MAKE_PATH)/tweak.mk

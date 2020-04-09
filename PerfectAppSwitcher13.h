@@ -29,3 +29,6 @@
 - (id)recentAppLayouts;
 - (void)_deleteAppLayout:(id)arg1 forReason:(long long)arg2;
 @end
+
+@interface SBFluidSwitcherIconImageContainerView: UIView
+@end

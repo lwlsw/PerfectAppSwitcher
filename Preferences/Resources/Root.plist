@@ -147,6 +147,28 @@
 			<string>Swipe Down To Kill All Apps</string>
 		</dict>
 		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>default</key>
+			<integer>1</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectappswitcher13prefs</string>
+			<key>key</key>
+			<string>swipeSpeed</string>
+			<key>validTitles</key>
+			<array>
+      			<string>Slow Swipe</string>
+      			<string>Medium Swipe</string>
+      			<string>Fast Swipe</string>
+			</array>
+      		<key>validValues</key>
+			<array>
+      			<string>-3</string>
+      			<string>-5</string>
+      			<string>-7</string>
+			</array>
+		</dict>
+		<dict>
         	<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>

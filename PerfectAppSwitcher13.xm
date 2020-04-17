@@ -9,6 +9,7 @@ static BOOL enabled;
 static BOOL gridSwitcher;
 static BOOL disablePlayingMediaKilling;
 static BOOL enableKillAll;
+static NSInteger swipeSpeed;
 static BOOL hideAppName;
 static BOOL hideAppIcon;
 static float appScale;
@@ -69,7 +70,7 @@ static NSInteger verticalLandscapeSpace;
 
 		SBMediaController *media = [%c(SBMediaController) sharedInstance];
 
-		if(media && media.isPlaying)
+		if(media && [media isPlaying])
 		{
 			SBFluidSwitcherItemContainerHeaderItem *allAppCards = [self headerItems];
 
@@ -92,22 +93,24 @@ static NSInteger verticalLandscapeSpace;
 
 	%hook SBFluidSwitcherItemContainer
 
-	-(void)scrollViewWillEndDragging:(id)arg1 withVelocity:(CGPoint)arg2 targetContentOffset:(CGPoint*)arg3
+	- (void)scrollViewWillEndDragging: (id)arg1 withVelocity: (CGPoint)arg2 targetContentOffset: (CGPoint*)arg3
 	{
-		if(arg2.y < -5.0)
+		if(arg2.y < swipeSpeed)
 		{
 			SBMainSwitcherViewController *mainSwitcher = [%c(SBMainSwitcherViewController) sharedInstance];
-			NSArray *items = mainSwitcher.recentAppLayouts;
+			NSArray *items = [mainSwitcher recentAppLayouts];
 
-			NSString *nowPlayingID = [[[%c(SBMediaController) sharedInstance] nowPlayingApplication] bundleIdentifier];
+			SBMediaController *media = [%c(SBMediaController) sharedInstance];
+			NSString *nowPlayingID = [[media nowPlayingApplication] bundleIdentifier];
 
 			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), 
 			^{
 				for(SBAppLayout *item in items)
 				{
-					NSString *bundleID = [[item.rolesToLayoutItemsMap objectForKey: @1] bundleIdentifier];
-					if(!disablePlayingMediaKilling || disablePlayingMediaKilling && ![bundleID isEqualToString: nowPlayingID]) 
-						[mainSwitcher _deleteAppLayout: item forReason: 1];
+					if(disablePlayingMediaKilling && [media isPlaying] && [[[[item rolesToLayoutItemsMap] objectForKey: @1] bundleIdentifier] isEqualToString: nowPlayingID])
+						continue;
+					
+					[mainSwitcher _deleteAppLayout: item forReason: 1];
 				}
 			});
 		}
@@ -155,6 +158,7 @@ static NSInteger verticalLandscapeSpace;
 			@"gridSwitcher": @NO,
 			@"disablePlayingMediaKilling": @NO,
 			@"enableKillAll": @NO,
+			@"swipeSpeed": @-5,
 			@"hideAppName": @NO,
 			@"hideAppIcon": @NO,
 			@"appScale": @0.38,
@@ -170,6 +174,7 @@ static NSInteger verticalLandscapeSpace;
 			gridSwitcher = [pref boolForKey: @"gridSwitcher"];
 			disablePlayingMediaKilling = [pref boolForKey: @"disablePlayingMediaKilling"];
 			enableKillAll = [pref boolForKey: @"enableKillAll"];
+			swipeSpeed = [pref integerForKey: @"swipeSpeed"];
 			hideAppName = [pref boolForKey: @"hideAppName"];
 			hideAppIcon = [pref boolForKey: @"hideAppIcon"];
 

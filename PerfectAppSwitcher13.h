@@ -10,7 +10,6 @@
 
 @interface SBAppLayout: NSObject
 @property(nonatomic, copy) NSDictionary *rolesToLayoutItemsMap;
-- (void)getAppId;
 @end
 
 @interface SBFluidSwitcherItemContainerHeaderItem: NSObject

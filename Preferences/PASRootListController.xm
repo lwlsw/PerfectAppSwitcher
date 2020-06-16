@@ -12,16 +12,16 @@
         PASAppearanceSettings *appearanceSettings = [[PASAppearanceSettings alloc] init];
         self.hb_appearanceSettings = appearanceSettings;
         self.respringButton = [[UIBarButtonItem alloc] initWithTitle: @"Respring" style: UIBarButtonItemStylePlain target: self action: @selector(respring)];
-        self.respringButton.tintColor = [UIColor blackColor];
+        self.respringButton.tintColor = [UIColor whiteColor];
         self.navigationItem.rightBarButtonItem = self.respringButton;
 
         self.navigationItem.titleView = [UIView new];
         self.titleLabel = [[UILabel alloc] init];
         self.titleLabel.font = [UIFont boldSystemFontOfSize: 17];
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.titleLabel.text = @"PerfectAppSwitcher13";
+        self.titleLabel.text = @"PerfectAppSwitcher";
 		self.titleLabel.alpha = 0.0;
-        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem.titleView addSubview: self.titleLabel];
 
@@ -76,7 +76,7 @@
 - (void)reset: (PSSpecifier*)specifier
 {
     UIAlertController *reset = [UIAlertController
-        alertControllerWithTitle: @"PerfectAppSwitcher13"
+        alertControllerWithTitle: @"PerfectAppSwitcher"
 		message: @"Do you really want to Reset All Settings?"
 		preferredStyle: UIAlertControllerStyleAlert];
 	UIAlertAction *confirmAction = [UIAlertAction actionWithTitle: @"Confirm" style: UIAlertActionStyleDestructive handler:

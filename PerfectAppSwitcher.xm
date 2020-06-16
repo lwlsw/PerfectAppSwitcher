@@ -1,5 +1,4 @@
-#import "PerfectAppSwitcher13.h"
-
+#import "PerfectAppSwitcher.h"
 #import <Cephei/HBPreferences.h>
 
 #define IS_iPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
